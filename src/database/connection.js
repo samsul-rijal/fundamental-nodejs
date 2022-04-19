@@ -1,10 +1,19 @@
-// Get Sequelize here ...
+const Sequelize = require("sequelize");
+const db = {};
+const sequelize = new Sequelize("course-express-b33", "root", "", {
+  host: "localhost",
+  dialect: "mysql",
+  logging: console.log,
+  freezeTableName: true,
 
-// Create db variable here ...
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000,
+  },
+});
 
-// Create sequelize variable and get config as object here ...
-// Customize your database config
+db.sequelize = sequelize;
 
-// Enter the database config to sequelize here ...
-
-// Create exports module db here ...
+module.exports = db;
