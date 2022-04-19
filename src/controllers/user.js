@@ -95,3 +95,23 @@ exports.updateUser = async (req, res) => {
 };
 
 // Create controller delete User here ...
+exports.deleteUser = async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      const query = `DELETE FROM users WHERE id = ${id}`;
+  
+      await db.sequelize.query(query);
+  
+      res.send({
+        status: "success",
+        message: `Delete user id: ${id} finished`,
+      });
+    } catch (error) {
+      console.log(error);
+      res.send({
+        status: "failed",
+        message: "Server Error",
+      });
+    }
+  };
