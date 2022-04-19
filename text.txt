@@ -1,0 +1,5 @@
+# Create database
+npx sequelize db:create
+
+# Create Tabel
+npx sequelize-cli model:generate --name user --attributes name:string,email:string,password:string
