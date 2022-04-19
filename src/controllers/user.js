@@ -68,3 +68,28 @@ exports.getUser = async (req, res) => {
 };
 
 // Create controller update User here ...
+exports.updateUser = async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      const { email, password, name, status } = req.body;
+  
+      const query = `UPDATE users 
+                        SET email = '${email}', password = '${password}', name = '${name}', status = '${status}'
+                        WHERE id = ${id}`;
+  
+      await db.sequelize.query(query);
+  
+      res.send({
+        status: "success",
+        message: `Update user id: ${id} finished`,
+        data: req.body,
+      });
+    } catch (error) {
+      console.log(error);
+      res.send({
+        status: "failed",
+        message: "Server Error",
+      });
+    }
+  };
